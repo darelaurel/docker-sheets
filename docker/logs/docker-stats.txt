@@ -1,0 +1,22 @@
+
+docker stats
+
+docker stats httpdc ==> voir les stats du container httpdc seul
+
+docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.NetIO}}" httpdc ==> affiche juste (name, cpu, net I/O)
+
+
+CONTAINER ID et Name : l'identifiant et le nom du conteneur.
+
+CPU % et MEM % : le pourcentage de CPU et de mémoire de l'hôte utilisé par le conteneur.
+
+MEM USAGE / LIMIT : la mémoire totale utilisée par le conteneur et la quantité totale de mémoire qu'il est autorisé à utiliser.
+
+NET I/O : la quantité de données que le conteneur a envoyées et reçues sur son interface réseau.
+
+BLOCK I/O : quantité de données lues et écrites par le conteneur à partir de périphériques en mode bloc sur l'hôte.
+
+PIDs : le nombre de processus ou de threads créés par le conteneur.
+
+
+

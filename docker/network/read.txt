@@ -1,0 +1,27 @@
+
+
+les conteneurs Docker puissent communiquer entre eux mais aussi avec le monde extérieur via la machine hôte, alors une couche de mise en réseau est nécessaire.
+
+Docker prend en charge différents types de réseaux qui sont adaptés à certains cas d'utilisation, que nous allons voir à travers ce chapitre.
+
+Le système réseau de Docker utilise des drivers (pilotes). Plusieurs drivers existent et fournissent des fonctionnalités différentes. 
+
+docker network create --driver <DRIVER TYPE> <NETWORK NAME> ==> commande pour creer un reseau
+
+docker network inspect mon-bridge ==> obtenir les infos sur mon reseau
+
+
+On peut ne peut qu'utiliser le driver host mais pas le créer. 
+
+
+docker network disconnect mon-bridge alpine1 ==> déconnecter le conteneur de mon reseau
+
+
+apres avoir deconnecté tous les containers du reseau on peut supprimer le reseau
+
+docker network rm mon-bridge
+
+ensuite reconnecter mes containers au reseau bridge par defaut
+
+docker network connect bridge alpine1
+

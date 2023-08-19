@@ -1,0 +1,10 @@
+
+
+utiliser docker sans sudo en créant un groupe
+
+sudo groupadd docker
+
+ajouter un user au groupe  pour acceder a docker sans etre root ==> $ sudo usermod -aG docker $USER 
+
+
+

@@ -1,0 +1,32 @@
+
+
+docker run --name test -it debian ==> runs a container named test using the debian:latest, 
+-i ==> garde entrée standard ouvert ou on peut interagir avec le conteneur(on peut ecrire dans le terminal via notre clavier)
+-t ==> lance un tty (terminal bash virutel) 
+
+exemples
+
+docker run -ti ubuntu:latest : on crée un conteneur basé sur la derniere image de ubuntu
+
+apt-get update -y && apt-get install -y git : on installe dans notre container git
+
+git --version : montre la version de git
+
+
+exit ==> quitter le conteneur
+
+
+
+
+docker pull httpd:latest
+docker run --name monServeurWeb -p 8080:80 httpd:latest
+
+--name : attribuer un nom au container
+--expose : Exposer un port ou une plage de ports (on demande au firewall du conteneur de nous ouvrir un port ou une plage de port) 
+-p ou --publish: Mapper un port déjà exposé, plus simplement ça permet de faire une redirection de port 
+
+docker run --name monServeurWeb -d -p 8080:80 httpd:latest ===> laisse tourner notre container en arriere plan 
+
+
+
+

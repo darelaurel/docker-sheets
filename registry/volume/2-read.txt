@@ -1,0 +1,15 @@
+
+aucun volume n'est créé, donc si vous quitter votre conteneur registry, vous perdrez automatiquement toutes vos images hébergées dans votre registry. Il est donc très important de rajouter un volum
+
+L'exemple suivant monte le répertoire hôte data/ vers le dossier /var/lib/registry/ de notre machine. 
+
+mkdir data
+
+docker run -d \
+    -p 5000:5000 \
+    --restart=always \
+    --name mon-registry \
+    -v "$(pwd)"/data:/var/lib/registry \
+    registry:2
+
+

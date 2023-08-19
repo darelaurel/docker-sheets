@@ -1,0 +1,30 @@
+
+
+docker volume ls ==> lister les volumes presents sur mon ordi
+
+docker volume inspect idVolume ==> pour avoir des infos sur un volume
+
+docker volume rm volumeId ==> supprimer un volume
+
+
+docker run -ti --name vtest_c -v data-test:/data vtest ==> run le container vtest en creant un volume data-test dans le dossier data de notre conteneur, 
+==> ce dossier est aussi disponible dans var/lib/docker/volumes/data de la machine hote, comme ca quand on supprime le conteneur ou si d'autres conteneurs utilisent le volume ils ont acces a cela
+
+echo "ceci est un test" > test.txt ==> depuis notre  terminal interactif, va creer un file test.txt dans _data de notre volume
+
+meme apres suppression du container vtest_c, le volume crée contiendra toujours les fichiers
+
+
+==>partager un voume sur l'hote
+
+Pour lancer un nouveau conteneur et faire correspondre le dossier /webfiles de l’hôte avec le dossier /var/www/html du conteneur, il convient par exemple d’utiliser la commande suivante :
+
+==> sudo docker run -it -v /webfiles:/var/www/html centos /bin/bash
+en creant un file sur le dossier du conteneur il est dispo dans le dossier de l'hote aussi et vice versa
+
+
+
+docker run -d --name my_lamp_c -v $PWD/app:/var/www/html -v mysqldata:/var/lib/mysql -p 8080:80 my_lamp : run le container en creant un volume qui monte $PWD/app sur /var/www/html du container
+==> ce dossier est aussi disponible dans var/lib/docker/volumes/$PWD/app de la machine hote, comme ca quand on supprime le conteneur ou si d'autres conteneurs utilisent le volume ils ont acces a cela
+
+

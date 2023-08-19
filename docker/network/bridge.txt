@@ -1,0 +1,14 @@
+
+Par defaut, tous les conteneurs sont connectés sur ce reseau
+
+Par ailleurs, le réseau bridge est le type de réseau le plus couramment utilisé. Il est limité aux conteneurs d'un hôte unique exécutant le moteur Docker. Les conteneurs qui utilisent ce driver, ne peuvent communiquer qu'entre eux, cependant ils ne sont pas accessibles depuis l'extérieur. 
+
+
+Pour que les conteneurs sur le réseau bridge puissent communiquer ou être accessibles du monde extérieur, vous devez configurer le mappage de port. 
+
+
+ip a | grep "docker" ou ip addr show docker0 pour avoir les infos sur ce reseau
+
+
+
+

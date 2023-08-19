@@ -1,0 +1,40 @@
+
+Mon source
+
+├── app
+│   ├── db-config.php
+│   └── index.php
+├── db
+│   └── articles.sql
+└── Dockerfile
+
+
+
+On veut creer un conteneur de LAMP (Linux APache mysql php)
+
+On cree toujours basé sur une couche de OS (la 1ere couche ) soit (alpine, debian,ubuntu)
+
+ici on part de debian comme couche 0S
+
+Ensuite, j'ai rajouté les métadonnées de mon image. Comme ça, si un jour je décide de partager mon image avec d'autres personnes, alors ils pourront facilement récolter des métadonnées sur l'image (ex: l'auteur de l'image) depuis la commande docker inspect <IMAGE_NAME>.
+
+Ici, j'ai créé deux variables temporaires qui ne me serviront qu'au sein de mon Dockerfile avec ARG
+
+
+Construire ma couche apache en executant les commandes de ma couche debian avec RUN
+
+Ici, je commence d'abord par télécharger le service mysql et ensuite je rajoute mon fichier articles.sql pour mon futur nouveau conteneur. 
+
+je construis ma couche php et je copie tout ce quil a sur mon source app dans le /var/www/html du container
+
+j'ouvre le port 80
+
+WORKDIR  ${DOCUMENTROOT} ==> j'ai mis le dossier /var/www/html en tant que répertoire de travail, comme ça, quand je démarrerai mon conteneur, alors je serai directement sur ce dossier. 
+
+ENTRYPOINT service mariadb start && mariadb < /articles.sql && apache2ctl -D FOREGROUND
+==> le service mysql démarrera et construira l'architecture de la base de données grâce à mon fichier articles.sql . un conteneur se ferme automatiquement à la fin de son processus principal. Il faut donc un processus qui tourne en premier plan pour que le conteneur soit toujours à l'état running, d'où le lancement du service Apache en premier plan à l'aide de la commande apache2 -D FOREGROUND
+
+on peut construire notre container en faisant docker build -t my_lamp .
+
+ensuite l'executer avec docker run -d --name my_lamp_c -p 8080:80 my_lamp
+

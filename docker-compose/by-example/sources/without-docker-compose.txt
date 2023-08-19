@@ -1,0 +1,24 @@
+
+
+docker run -d -e MYSQL_ROOT_PASSWORD='test' \
+-e MYSQL_DATABASE='test' \
+-e MYSQL_USER='test' \
+-e MYSQL_PASSWORD='test' \
+--volume db-volume:/var/lib/mysql \
+--volume $PWD/articles.sql:/docker-entrypoint-initdb.d/articles.sql \
+--name mysql_c mysql:5.7
+
+
+
+docker run -d --volume $PWD/app:/var/www/html -p 8080:80 --link mysql_c --name myapp_c myapp
+
+
+
+
+-e : definit var d'environnement
+
+--link: lier un conteneur à un autre
+
+
+commande trop longue d'ou docker-compose
+

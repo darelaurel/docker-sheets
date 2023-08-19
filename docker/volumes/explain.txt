@@ -1,0 +1,7 @@
+
+-v <source>:<destination>:<options>
+
+
+Si "source" est un chemin utilisé dans l'exemple précédent, Docker utilisera un lien de montage (faire correspondre un dossier de la machine hote a un dossier du container). les contenus du volume sont sur la machine hote, docker fait des resolutions de chemins pour rendre accessible ses data
+
+Si "source" est un nom, alors Docker essaie de trouver ce volume ou en crée un s'il n'est pas possible d'en trouver un.

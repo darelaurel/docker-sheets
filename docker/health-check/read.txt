@@ -1,0 +1,18 @@
+
+Un container peut avoir un status (running) mais etre unhealthy
+
+unhealthy ==> détermine l'etat du conteneur
+
+eg: une app peut etre en cours et avoir des bugs qui l'empeche de marcher (running mais unhealthy)
+
+avec la cmd docker container inspect idContainer permet d'avoir les details sur la raison du mauvais état du container
+
+l'instruction HEALTHCHECK permet de verifier le bon fonctionnement de l'app dans le container
+
+
+Health checks become really useful in a cluster with multiple servers running Docker being managed by Docker Swarm or Kubernetes. Then the container platform is notified if the container is unhealthy and it can take action. Because there is additional capacity in a cluster, a replacement container can be started while the unhealthy one is still running, so there shouldn’t be any application downtime.
+
+
+
+
+

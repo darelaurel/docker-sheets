@@ -1,0 +1,28 @@
+
+
+-interval=DURATION (30s by default)
+-timeout=DURATION (30s by default)
+-start-period=DURATION (0s by default).
+retries should be set to N (default: 3)
+
+
+The timeout option controls the amount of time Docker health checks waits for an exit code to be returned before deeming your health check failed ( therefore deeming your container unhealthy).
+
+A docker health check should be executed within an interval of seconds defined by the interval option. Additionally, the frequency of recurrent health checks will be determined.
+
+You can specify the start-period option to determine how long your container needs to bootstrap. The container will not be supposed unhealthy if the Docker health check's exit code is greater than zero; however, it will be deemed healthy if the exit code is 0.
+
+The number of simultaneous failures at the docker health check that must arise before a container is labelled unhealthy is confined by the retries option.
+
+
+exit code
+
+0 – A healthy and functioning container.
+
+1 – Containers are unhealthy, and workloads may not be working.
+
+
+
+
+
+

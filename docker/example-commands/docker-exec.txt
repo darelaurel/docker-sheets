@@ -1,0 +1,27 @@
+
+
+Example 1
+
+docker exec -ti monServeurWeb /bin/bash 
+
+==>
+execute n'importe quelle commande dans un conteneur déjà en cours d'exécution. 
+Nous allons l'utilisée pour récupérer notre interpréteur de commande /bin/bash, ce qui aura pour but de se connecter directement à notre conteneur Apache, bash devient le processus principal de notre conteneur et a l'arret ne sera pas arreté automatiquement avec exit
+
+
+echo "<h1>Docker c'est vraiment cool</h1>" > /usr/local/apache2/htdocs/index.html
+
+==> on peut changer notre index.html de notre conteneur de apache et on aura les changes a http://localhost:8080 
+
+
+Example 2
+
+ docker run --name mycontainer -d -i -t alpine /bin/sh
+
+ docker exec -d mycontainer touch /tmp/execWorks ==> on cree le file tmp/execWorks dans le conteneur en arriere plan
+
+ docker exec -it mycontainer sh ==> cree une nouvelle session de sh dans le conteneur
+
+
+
+

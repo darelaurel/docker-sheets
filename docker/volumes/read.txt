@@ -1,0 +1,30 @@
+
+
+ En effet, une image Docker se compose d'un ensemble de layers (calques) en lecture seule. Lorsque vous lancez un conteneur à partir d'une image, Docker ajoute au sommet de cette pile de layers un nouveau layer en lecture-écriture. Docker appelle cette combinaison de couches un "Union File System".
+
+
+Voyons voir comment le moteur Docker gère les modifications de vos fichiers au sein de votre conteneur :
+
+Lors d'une modification de fichier, Docker crée une copie depuis les couches en lecture seule vers le layer en lecture-écriture.
+
+Lors d'une création de fichier, Docker crée le fichier que sur le layer en lecture-écriture, et ne touche pas au layer en lecture seule.
+
+Lors d'une suppression de fichier, Docker supprime le fichier que sur le layer en lecture-écriture, et si il est déjà éxistant dans le layer en lecture seule alors il le garde.
+
+Les données dans le layer de base sont en lecture seule, elles sont donc protégées et intactes par toutes modifications, seul le layer en lecture-écriture est impacté lors de modifications de données.
+
+Lorsqu'un conteneur est supprimé, le layer en lecture-écriture est supprimé avec. Cela signifie que toutes les modifications apportées après le lancement du conteneur auront disparus avec. 
+
+
+ Afin de pouvoir sauvegarder (persister) les données et également partager des données entre conteneurs, Docker a développé le concept de volumes. Les volumes sont des répertoires (ou des fichiers) qui ne font pas partie du système de fichiers Union mais qui existent sur le système de fichiers hôte.
+
+En outre, les volumes constituent souvent le meilleur choix pour persistance des données pour le layer en lecture-écriture, car un volume n'augmente pas la taille des conteneurs qui l'utilisent et son contenu existe en dehors du cycle de vie d'un conteneur donné. 
+
+
+**Relative Path**: ./relative-path-volume:/var/data-two
+**Absolute Path**: /home/ubuntu/absolute-path-volume:/var/data-one
+**Docker Volume Default Path**: docker-volume-default-path-volume:/var/data-three
+**Docker Volume with Absolute Path**: docker-volume-absolute-path-volume:/var/data-four
+
+
+

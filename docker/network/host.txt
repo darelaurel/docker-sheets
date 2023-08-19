@@ -1,0 +1,9 @@
+
+Ce type de réseau permet aux conteneurs d'utiliser la même interface que l'hôte. Il supprime donc l'isolation réseau entre les conteneurs et seront par défaut accessibles de l'extérieur. De ce fait, il prendra la même IP que votre machine hôte. 
+
+docker run -it --rm --network host --name net alpine ip add show wlp3s0 ==> run un conteneur basé sur l'image alpine avec un driver de type host
+
+On aura les memes infos de ip add show wlp3s0 sur la machine hote et dans notre container
+
+wlp3s0 ==> interface reseau wifi de ma machine
+

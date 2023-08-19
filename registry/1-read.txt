@@ -1,0 +1,47 @@
+
+Par défaut, le moteur Docker interagit avec le DockerHub. DockerHub est le registre officiel de Docker offrant une solution prête à l'emploi,
+
+nous allons nous intéresser au déploiement d'un serveur Docker Registry privé. 
+
+installer le moteur Docker sur la machine hôte qui hébergera vos images Docker, car un Registry n’est rien d’autre qu’une image Docker qui attend à être exécutée. 
+
+commande qui crée un Docker Registry privé : 
+
+docker run -d -p 5000:5000 --restart=always --name mon-registry registry:2
+
+build mon dockerfile1 ==>  docker build -t alpinegit . 
+
+
+pousser notre image dans notre Registry  ==> 
+	 docker tag alpinegit <SERVER NAME REGISTRY>:<PORT SERVER REGISTRY>/<CONTAINER NAME> ==> ajoute tag
+	 docker tag alpinegit localhost:5000/alpinegit
+	 docker push localhost:5000/alpinegit ==> pousse notre image dans le registry
+
+
+visualiser les images du registry
+	curl -X GET http://localhost:5000/v2/_catalog
+	//output ==>  {"repositories":["alpinegit"]}
+
+
+on build notre dockerfile2 quon push dans le registry
+ 	docker build -t alpinemysql .
+	$ docker tag alpinemysql localhost:5000/alpinemysql
+	$ docker push localhost:5000/alpinemysql
+
+
+recuperer depuis le registry
+	docker pull localhost:5000/alpinegit
+
+
+
+
+
+
+
+
+
+
+
+
+
+

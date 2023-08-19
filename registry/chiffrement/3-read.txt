@@ -1,0 +1,39 @@
+
+L'exécution d'un Registry accessible uniquement en local a une utilité limitée. Afin de rendre un Registry accessible aux hôtes externes, vous devez d'abord sécuriser le Registry Docker à l'aide de TLS. 
+
+Le Registry prend en charge l'utilisation de Let's Encrypt afin d'obtenir automatiquement un certificat approuvé par les navigateu
+
+Cependant dans notre exemple, nous allons générer des certificats auto-signés, ils ne seront pas reconnus par nos navigateurs mais au moins la communication avec notre Registry sera chiffrée. 
+
+
+mkdir certs, dans lequel on mettra nos certificats localhost.key & localhost.cert
+
+
+ensuite run  ==>
+openssl req \
+    -newkey rsa:4096 -nodes -sha256 -keyout certs/localhost.key \
+    -x509 -days 365 -out certs/localhost.crt
+
+
+docker run -d \           
+    --restart=always \   
+    --name mon-registry \
+    -v "$(pwd)"/data:/var/lib/registry \
+    -v "$(pwd)"/certs:/certs \         
+    -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+    -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/localhost.crt \
+    -e REGISTRY_HTTP_TLS_KEY=/certs/localhost.key \
+    -p 443:443 \
+    registry:2
+
+
+ La ligne REGISTRY_HTTP_ADDR=0.0.0.0:443, permet de rendre notre registry accessible depuis n'importe IP. 
+
+==>envoi d'image sur un registry chiffré
+
+ docker tag alpinegit localhost:443/alpinegit
+ docker tag alpinemysql localhost:443/alpinemysql
+ docker push localhost:443/alpinegit
+ docker push localhost:443/alpinemysql
+
+curl -X GET http://localhost:5000/v2/_catalog ==> visualiser les images de notre registry chiffré
