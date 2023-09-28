@@ -1,0 +1,12 @@
+
+# Définir la commande pour démarrer le serveur
+CMD ["python", "app.py"]
+# ajoutez un contrôle d'état de santé du serveur
+HEALTHCHECK --interval=5s \\
+            --timeout=5s \\
+            CMD curl --fail <http://localhost:5000/health> || exit 1
+
+
+=>verifie toutes les 5s que curl sur api health de notre backend a un 200 au bout de 5s, 
+=> si pas le cas, renvoie un code d'erreur
+=>le contrôle de l'état de santé échoue et le conteneur est marqué comme étant en mauvais état.

@@ -1,0 +1,26 @@
+
+docker exec -ti <container name> /bin/bash
+
+docker rm -f $(docker ps -a -q)  
+
+docker system prune --all
+
+docker rm `docker ps -aq -f status=exited`
+
+docker image prune
+
+docker rmi $(docker images -a -q)
+
+docker rm $(docker ps -a -f status=exited -f status=created -q)
+
+docker builder prune -f  : Remove build cache
+
+docker ps --format "table  {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"
+
+Restarting (exitCode) x seconds
+
+alias docker-clean=' \
+  docker container prune -f ; \
+  docker image prune -f ; \
+  docker network prune -f ; \
+  docker volume prune -f '

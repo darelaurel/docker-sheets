@@ -1,22 +1,17 @@
 
+docker run -ti --name monUbuntu  ubuntu:latest
 
-docker run --name test -it debian ==> runs a container named test using the debian:latest, 
 -i ==> garde entrée standard ouvert ou on peut interagir avec le conteneur(on peut ecrire dans le terminal via notre clavier)
--t ==> lance un tty (terminal bash virutel) 
-
-exemples
-
-docker run -ti ubuntu:latest : on crée un conteneur basé sur la derniere image de ubuntu
-
-apt-get update -y && apt-get install -y git : on installe dans notre container git
-
-git --version : montre la version de git
+-t ==> lance un tty (terminal bash virtuel) 
 
 
-exit ==> quitter le conteneur
+apt-get update -y && apt-get install -y git ==> ajout de dep dans mon container
 
 
+echo "ceci est un fichier qui contient des donnes de test" > test.txt && cat test.txt
 
+
+cree mon image a partir de mon conteneur ==> docker commit monUbuntu ubuntugit
 
 docker pull httpd:latest
 docker run --name monServeurWeb -p 8080:80 httpd:latest
@@ -26,7 +21,6 @@ docker run --name monServeurWeb -p 8080:80 httpd:latest
 -p ou --publish: Mapper un port déjà exposé, plus simplement ça permet de faire une redirection de port 
 
 docker run --name monServeurWeb -d -p 8080:80 httpd:latest ===> laisse tourner notre container en arriere plan 
-
 
 
 

@@ -1,0 +1,17 @@
+
+FROM alpine:latest
+
+# Créer un utilisateur et se connecter avec ce dernier
+RUN adduser -D -u 1000 appuser
+
+USER appuser
+
+# Définir le répertoire de travail à /app
+WORKDIR /app
+
+# Copier le script dans le conteneur et le rendre exécutable
+COPY script.sh .
+RUN chmod +x script.sh
+
+# Lancer le script
+CMD ["./script.sh"]
