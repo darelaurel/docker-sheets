@@ -11,7 +11,7 @@ RUN : Exécute des commandes Linux ou Windows lors de la création de l'image. C
 
 COPY : Permet de copier des fichiers depuis notre machine locale vers le conteneur Docker.
 
-ADD : Même chose que COPY mais prend en charge des liens ou des archives(ex : zip, tar.gz, etc ...),  (si le format est reconnu, alors il sera décompressé à la volée).
+ADD : Même chose que COPY mais prend en charge le telechargement des liens ou des archives(ex : zip, tar.gz, etc ...),  (si le format est reconnu, alors il sera décompressé à la volée).
 
 ENTRYPOINT : comme son nom l'indique, c'est le point d'entrée de votre conteneur, en d'autres termes, c'est la commande qui sera toujours exécutée au démarrage du conteneur. Il prend la forme de tableau JSON (ex : CMD ["cmd1","cmd1"]) ou de texte.
 

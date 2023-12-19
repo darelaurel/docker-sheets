@@ -1,0 +1,6 @@
+
+docker build -t nameContainer .
+
+docker run nameContainer
+
+creer image => docker commit nameContainer newImage

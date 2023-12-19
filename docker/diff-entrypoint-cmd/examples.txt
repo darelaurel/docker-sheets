@@ -1,0 +1,6 @@
+
+CMD ["sleep","5"] ==> can be override docker run container sleep 5
+
+ENTRYPOINT ["sleep"] => docker run container 10 => docker run container sleep 10
+
+ENTRYPOINT ["sleep"], CMD ["10"] => docker run container sleep 10
